@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create basic Amazon ECR
+Parameters:
+  ECRName:
+    Type: String
+    Description: ECR Repo name
+  ImageScanning:
+    Type: String
+    Description: Enable Image Scan
+    Default: true
+    AllowedValues:
+      - true
+      - false
+Resources:
+  MyECRRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Ref ECRName
+      ImageScanningConfiguration:
+        ScanOnPush: !Ref ImageScanning
+      Tags:
+        - Key: TagKey1
+          Value: TagValue1
+
+Outputs:
+  MyECRRepository:
+    Value: !Ref MyECRRepository
